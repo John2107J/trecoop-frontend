@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { obtenerProductos } from "../services/productService";
+import ProductCard from "../components/ProductCard";
 
 const Productos = () => {
   const [productos, setProductos] = useState([]);
@@ -34,13 +35,11 @@ const Productos = () => {
       {productos.length === 0 ? (
         <p>No hay productos disponibles.</p>
       ) : (
-        <ul>
+        <div>
           {productos.map((producto) => (
-            <li key={producto._id}>
-              {producto.nombre} - ${producto.precio} - Stock: {producto.stock}
-            </li>
+            <ProductCard key={producto._id} producto={producto} />
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
