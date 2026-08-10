@@ -6,6 +6,7 @@ import "./index.css";
 
 import { store } from "./redux/store";
 import MainLayout from "./layouts/MainLayout";
+import RutaPrivada from "./components/RutaPrivada";
 import Home from "./pages/Home";
 import Productos from "./pages/Productos";
 import ProductoDetalle from "./pages/ProductoDetalle";
@@ -23,7 +24,14 @@ const router = createBrowserRouter([
       { path: "producto/:id", element: <ProductoDetalle /> },
       { path: "carrito", element: <Carrito /> },
       { path: "login", element: <Login /> },
-      { path: "admin", element: <Admin /> },
+      {
+        path: "admin",
+        element: (
+          <RutaPrivada rolesPermitidos={["administrador"]}>
+            <Admin />
+          </RutaPrivada>
+        ),
+      },
     ],
   },
 ]);
