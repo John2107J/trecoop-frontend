@@ -54,3 +54,16 @@
   display: flex;
   justify-content: flex-end;
 }
+
+/*Responsive*/
+@media (max-width: 768px) {
+  .carrito-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+
+  .carrito-item .btn {
+    align-self: flex-end;
+  }
+}

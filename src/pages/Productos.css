@@ -8,3 +8,10 @@
   gap: var(--space-md);
   margin-top: var(--space-md);
 }
+
+/*Responsive*/
+@media (max-width: 768px) {
+  .productos-page {
+    padding: var(--space-md) var(--space-sm);
+  }
+}
