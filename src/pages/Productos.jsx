@@ -7,11 +7,15 @@ const Productos = () => {
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+  const [busqueda, setBusqueda] = useState("");
 
   useEffect(() => {
     const cargarProductos = async () => {
       try {
-        const data = await obtenerProductos();
+        setCargando(true);
+        const data = await obtenerProductos(
+          busqueda ? { buscar: busqueda } : {},
+        );
         setProductos(data);
       } catch (err) {
         setError(
@@ -23,18 +27,33 @@ const Productos = () => {
       }
     };
 
-    cargarProductos();
-  }, []);
+    const timeoutId = setTimeout(() => {
+      cargarProductos();
+    }, 400);
 
-  if (cargando) return <p className="container">Cargando productos...</p>;
-  if (error) return <p className="container">{error}</p>;
+    return () => clearTimeout(timeoutId);
+  }, [busqueda]);
 
   return (
     <div className="productos-page container">
       <h1>Productos</h1>
-      {productos.length === 0 ? (
-        <p>No hay productos disponibles.</p>
-      ) : (
+
+      <input
+        type="text"
+        className="productos-buscador"
+        placeholder="Buscar productos..."
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
+      />
+
+      {cargando && <p>Cargando productos...</p>}
+      {error && <p>{error}</p>}
+
+      {!cargando && !error && productos.length === 0 && (
+        <p>No se encontraron productos.</p>
+      )}
+
+      {!cargando && !error && productos.length > 0 && (
         <div className="productos-grid">
           {productos.map((producto) => (
             <ProductCard key={producto._id} producto={producto} />

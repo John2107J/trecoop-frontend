@@ -1,0 +1,11 @@
+.registro-link {
+  text-align: center;
+  margin-top: var(--space-md);
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+.registro-link a {
+  color: var(--color-primary);
+  font-weight: 600;
+}

@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import "./styles/variables.css";
 import "./styles/global.css";
 
+import Registro from "./pages/Registro";
 import { store } from "./redux/store";
 import MainLayout from "./layouts/MainLayout";
 import RutaPrivada from "./components/RutaPrivada";
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       { path: "producto/:id", element: <ProductoDetalle /> },
       { path: "carrito", element: <Carrito /> },
       { path: "login", element: <Login /> },
+      { path: "registro", element: <Registro /> },
       {
         path: "admin",
         element: (
