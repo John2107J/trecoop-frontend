@@ -9,3 +9,18 @@ export const obtenerProductoPorId = async (id) => {
   const { data } = await api.get(`/api/products/${id}`);
   return data;
 };
+
+export const crearProducto = async (producto) => {
+  const { data } = await api.post("/api/products", producto);
+  return data;
+};
+
+export const actualizarProducto = async (id, producto) => {
+  const { data } = await api.put(`/api/products/${id}`, producto);
+  return data;
+};
+
+export const eliminarProducto = async (id) => {
+  const { data } = await api.delete(`/api/products/${id}`);
+  return data;
+};

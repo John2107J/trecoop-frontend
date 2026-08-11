@@ -15,7 +15,6 @@ const ProductoDetalle = () => {
   useEffect(() => {
     const cargarProducto = async () => {
       try {
-        setCargando(true);
         setError(null);
         const data = await obtenerProductoPorId(id);
         setProducto(data);

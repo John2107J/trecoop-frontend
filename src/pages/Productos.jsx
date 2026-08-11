@@ -10,7 +10,6 @@ const Productos = () => {
   useEffect(() => {
     const cargarProductos = async () => {
       try {
-        setCargando(true);
         const data = await obtenerProductos();
         setProductos(data);
       } catch (err) {
