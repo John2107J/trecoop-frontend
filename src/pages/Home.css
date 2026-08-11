@@ -1,0 +1,35 @@
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--space-md);
+}
+
+.home-logo {
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+}
+
+.home-tagline {
+  font-family: var(--font-mono);
+  color: var(--color-ink-soft);
+  font-size: 1rem;
+  margin-top: var(--space-sm);
+  max-width: 480px;
+}
+
+.home-cta {
+  margin-top: var(--space-lg);
+}
+
+@media (max-width: 480px) {
+  .home-hero {
+    padding: var(--space-lg) var(--space-sm);
+  }
+
+  .home-logo {
+    max-width: 280px;
+  }
+}
