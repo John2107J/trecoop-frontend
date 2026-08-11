@@ -8,6 +8,7 @@ import {
   eliminarProducto,
 } from "../services/productService";
 import { obtenerCategorias } from "../services/categoryService";
+import "./Admin.css";
 
 const Admin = () => {
   const [productos, setProductos] = useState([]);
@@ -90,15 +91,22 @@ const Admin = () => {
     setProductoEditando(null);
   };
 
-  if (cargando) return <p>Cargando panel...</p>;
-  if (error) return <p>{error}</p>;
+  if (cargando) return <p className="container">Cargando panel...</p>;
+  if (error) return <p className="container">{error}</p>;
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className="admin-layout">
       <Sidebar />
 
-      <div>
-        <h1>Panel de Administración</h1>
+      <div className="admin-content">
+        <div className="admin-content-header">
+          <h1>Panel de Administración</h1>
+          {!mostrarForm && (
+            <button className="btn btn-primary" onClick={handleNuevoProducto}>
+              + Nuevo Producto
+            </button>
+          )}
+        </div>
 
         {mostrarForm ? (
           <Form
@@ -109,10 +117,8 @@ const Admin = () => {
             onCancelar={handleCancelar}
           />
         ) : (
-          <>
-            <button onClick={handleNuevoProducto}>+ Nuevo Producto</button>
-
-            <table>
+          <div className="admin-table-wrapper">
+            <table className="admin-table">
               <thead>
                 <tr>
                   <th>Nombre</th>
@@ -126,24 +132,30 @@ const Admin = () => {
                 {productos.map((producto) => (
                   <tr key={producto._id}>
                     <td>{producto.nombre}</td>
-                    <td>${producto.precio}</td>
+                    <td className="admin-table-precio">${producto.precio}</td>
                     <td>{producto.stock}</td>
                     <td>{producto.categoria?.nombre || "—"}</td>
                     <td>
-                      <button onClick={() => handleEditarProducto(producto)}>
-                        Editar
-                      </button>
-                      <button
-                        onClick={() => handleEliminarProducto(producto._id)}
-                      >
-                        Eliminar
-                      </button>
+                      <div className="admin-table-acciones">
+                        <button
+                          className="btn btn-secondary"
+                          onClick={() => handleEditarProducto(producto)}
+                        >
+                          Editar
+                        </button>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => handleEliminarProducto(producto._id)}
+                        >
+                          Eliminar
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </>
+          </div>
         )}
       </div>
     </div>

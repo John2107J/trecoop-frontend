@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { obtenerProductoPorId } from "../services/productService";
 import { agregarProducto } from "../redux/slices/cartSlice";
+import "./ProductoDetalle.css";
 
 const ProductoDetalle = () => {
   const { id } = useParams();
@@ -33,22 +34,35 @@ const ProductoDetalle = () => {
     dispatch(agregarProducto(producto));
   };
 
-  if (cargando) return <p>Cargando producto...</p>;
-  if (error) return <p>{error}</p>;
+  if (cargando) return <p className="container">Cargando producto...</p>;
+  if (error) return <p className="container">{error}</p>;
   if (!producto) return null;
 
   return (
-    <div>
-      <Link to="/productos">← Volver a productos</Link>
+    <div className="detalle-page container">
+      <Link to="/productos" className="detalle-volver">
+        ← Volver a productos
+      </Link>
       <h1>{producto.nombre}</h1>
-      <p>{producto.descripcion}</p>
-      <p>Precio: ${producto.precio}</p>
-      <p>Stock disponible: {producto.stock}</p>
-      {producto.categoria && <p>Categoría: {producto.categoria.nombre}</p>}
-      {producto.vendedor && <p>Vendido por: {producto.vendedor.nombre}</p>}
-      <button onClick={handleAgregarAlCarrito} disabled={producto.stock === 0}>
-        {producto.stock === 0 ? "Sin stock" : "Agregar al carrito"}
-      </button>
+      <p className="detalle-desc">{producto.descripcion}</p>
+      {producto.categoria && (
+        <p className="detalle-meta">Categoría: {producto.categoria.nombre}</p>
+      )}
+      {producto.vendedor && (
+        <p className="detalle-meta">Vendido por: {producto.vendedor.nombre}</p>
+      )}
+      <p className="detalle-meta">Stock disponible: {producto.stock}</p>
+
+      <div className="detalle-footer">
+        <span className="price-tag">${producto.precio}</span>
+        <button
+          className="btn btn-primary"
+          onClick={handleAgregarAlCarrito}
+          disabled={producto.stock === 0}
+        >
+          {producto.stock === 0 ? "Sin stock" : "Agregar al carrito"}
+        </button>
+      </div>
     </div>
   );
 };

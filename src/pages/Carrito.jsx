@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { eliminarProducto, vaciarCarrito } from "../redux/slices/cartSlice";
+import "./Carrito.css";
 
 const Carrito = () => {
   const items = useSelector((state) => state.cart.items);
@@ -12,29 +13,46 @@ const Carrito = () => {
 
   if (items.length === 0) {
     return (
-      <div>
+      <div className="carrito-page container">
         <h1>Carrito</h1>
-        <p>Tu carrito está vacío.</p>
+        <p className="carrito-vacio">Tu carrito está vacío.</p>
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="carrito-page container">
       <h1>Carrito</h1>
-      <ul>
+      <ul className="carrito-lista">
         {items.map((item) => (
-          <li key={item._id}>
-            {item.nombre} - Cantidad: {item.cantidad} - $
-            {item.precio * item.cantidad}
-            <button onClick={() => dispatch(eliminarProducto(item._id))}>
+          <li key={item._id} className="carrito-item">
+            <div className="carrito-item-info">
+              <span className="carrito-item-nombre">{item.nombre}</span>
+              <span className="carrito-item-detalle">
+                Cantidad: {item.cantidad} · ${item.precio * item.cantidad}
+              </span>
+            </div>
+            <button
+              className="btn btn-danger"
+              onClick={() => dispatch(eliminarProducto(item._id))}
+            >
               Eliminar
             </button>
           </li>
         ))}
       </ul>
-      <p>Total: ${total}</p>
-      <button onClick={() => dispatch(vaciarCarrito())}>Vaciar carrito</button>
+      <div className="carrito-total">
+        <span>Total</span>
+        <span>${total}</span>
+      </div>
+      <div className="carrito-acciones">
+        <button
+          className="btn btn-secondary"
+          onClick={() => dispatch(vaciarCarrito())}
+        >
+          Vaciar carrito
+        </button>
+      </div>
     </div>
   );
 };

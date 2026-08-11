@@ -1,0 +1,29 @@
+:root {
+  /* Colores */
+  --color-bg: #edeae3;
+  --color-surface: #ffffff;
+  --color-ink: #24211d;
+  --color-ink-soft: #5c574e;
+  --color-primary: #c1440e;
+  --color-primary-dark: #9a360a;
+  --color-secondary: #2f5233;
+  --color-accent: #f2b705;
+  --color-line: #d9d4c7;
+  --color-danger: #b3261e;
+
+  /* Tipografía */
+  --font-display: "Big Shoulders Display", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Espaciado */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+
+  /* Bordes */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+}

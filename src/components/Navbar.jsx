@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/slices/authSlice";
+import "./Navbar.css";
 
 const Navbar = () => {
   const { usuario } = useSelector((state) => state.auth);
@@ -13,18 +14,22 @@ const Navbar = () => {
   };
 
   return (
-    <nav>
-      <Link to="/">Trecoop</Link>
-      <div>
+    <nav className="navbar">
+      <Link to="/" className="navbar-logo">
+        Trecoop
+      </Link>
+      <div className="navbar-links">
         <Link to="/productos">Productos</Link>
         <Link to="/carrito">Carrito</Link>
 
         {usuario ? (
-          <>
-            <span>Hola, {usuario.nombre}</span>
+          <div className="navbar-user">
+            <span className="navbar-greeting">Hola, {usuario.nombre}</span>
             {usuario.role === "administrador" && <Link to="/admin">Admin</Link>}
-            <button onClick={handleLogout}>Cerrar sesión</button>
-          </>
+            <button className="navbar-logout" onClick={handleLogout}>
+              Cerrar sesión
+            </button>
+          </div>
         ) : (
           <Link to="/login">Login</Link>
         )}

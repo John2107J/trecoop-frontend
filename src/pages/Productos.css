@@ -1,0 +1,10 @@
+.productos-page {
+  padding: var(--space-lg) var(--space-md);
+}
+
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}

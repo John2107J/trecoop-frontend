@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Form.css";
 
 const Form = ({ productoInicial, categorias, onSubmit, onCancelar }) => {
   const [formData, setFormData] = useState(() => ({
@@ -24,9 +25,9 @@ const Form = ({ productoInicial, categorias, onSubmit, onCancelar }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Nombre:</label>
+    <form className="admin-form" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label>Nombre</label>
         <input
           type="text"
           name="nombre"
@@ -36,8 +37,8 @@ const Form = ({ productoInicial, categorias, onSubmit, onCancelar }) => {
         />
       </div>
 
-      <div>
-        <label>Precio:</label>
+      <div className="form-group">
+        <label>Precio</label>
         <input
           type="number"
           name="precio"
@@ -48,8 +49,8 @@ const Form = ({ productoInicial, categorias, onSubmit, onCancelar }) => {
         />
       </div>
 
-      <div>
-        <label>Descripción:</label>
+      <div className="form-group">
+        <label>Descripción</label>
         <textarea
           name="descripcion"
           value={formData.descripcion}
@@ -58,8 +59,8 @@ const Form = ({ productoInicial, categorias, onSubmit, onCancelar }) => {
         />
       </div>
 
-      <div>
-        <label>Stock:</label>
+      <div className="form-group">
+        <label>Stock</label>
         <input
           type="number"
           name="stock"
@@ -70,8 +71,8 @@ const Form = ({ productoInicial, categorias, onSubmit, onCancelar }) => {
         />
       </div>
 
-      <div>
-        <label>Categoría:</label>
+      <div className="form-group">
+        <label>Categoría</label>
         <select
           name="categoria"
           value={formData.categoria}
@@ -87,12 +88,18 @@ const Form = ({ productoInicial, categorias, onSubmit, onCancelar }) => {
         </select>
       </div>
 
-      <button type="submit">
-        {productoInicial ? "Actualizar" : "Crear"} Producto
-      </button>
-      <button type="button" onClick={onCancelar}>
-        Cancelar
-      </button>
+      <div className="admin-form-actions">
+        <button type="submit" className="btn btn-primary">
+          {productoInicial ? "Actualizar" : "Crear"} Producto
+        </button>
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={onCancelar}
+        >
+          Cancelar
+        </button>
+      </div>
     </form>
   );
 };

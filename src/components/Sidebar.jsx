@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
+import "./Sidebar.css";
 
 const Sidebar = () => {
   return (
-    <aside>
+    <aside className="sidebar">
       <h3>Panel Admin</h3>
       <nav>
         <NavLink to="/admin">Productos</NavLink>

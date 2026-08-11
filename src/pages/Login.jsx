@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../services/authService";
 import { setCredenciales } from "../redux/slices/authSlice";
+import "./Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -31,11 +32,11 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-page">
       <h1>Iniciar sesión</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
+        <div className="form-group">
+          <label>Email</label>
           <input
             type="email"
             value={email}
@@ -43,8 +44,8 @@ const Login = () => {
             required
           />
         </div>
-        <div>
-          <label>Contraseña:</label>
+        <div className="form-group">
+          <label>Contraseña</label>
           <input
             type="password"
             value={password}
@@ -52,8 +53,8 @@ const Login = () => {
             required
           />
         </div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <button type="submit" disabled={cargando}>
+        {error && <p className="form-error">{error}</p>}
+        <button className="btn btn-primary" type="submit" disabled={cargando}>
           {cargando ? "Ingresando..." : "Ingresar"}
         </button>
       </form>

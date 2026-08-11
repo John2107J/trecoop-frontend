@@ -1,0 +1,65 @@
+.product-card {
+  position: relative;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(36, 33, 29, 0.08);
+}
+
+.product-card-title {
+  font-size: 1.05rem;
+  text-decoration: none;
+}
+
+.product-card-title:hover {
+  color: var(--color-primary);
+}
+
+.product-card-desc {
+  color: var(--color-ink-soft);
+  font-size: 0.85rem;
+  flex-grow: 1;
+}
+
+.product-card-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-ink-soft);
+}
+
+.product-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-xs);
+}
+
+/* El elemento distintivo: etiqueta de precio tipo pistola rotuladora */
+.price-tag {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1rem;
+  background-color: var(--color-accent);
+  color: var(--color-ink);
+  padding: 0.3rem 0.7rem;
+  border-radius: 3px;
+  transform: rotate(-2deg);
+  display: inline-block;
+  box-shadow: 1px 2px 0 rgba(36, 33, 29, 0.15);
+}
+
+.product-card .btn {
+  width: 100%;
+  margin-top: var(--space-xs);
+}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { obtenerProductos } from "../services/productService";
 import ProductCard from "../components/ProductCard";
+import "./Productos.css";
 
 const Productos = () => {
   const [productos, setProductos] = useState([]);
@@ -25,16 +26,16 @@ const Productos = () => {
     cargarProductos();
   }, []);
 
-  if (cargando) return <p>Cargando productos...</p>;
-  if (error) return <p>{error}</p>;
+  if (cargando) return <p className="container">Cargando productos...</p>;
+  if (error) return <p className="container">{error}</p>;
 
   return (
-    <div>
+    <div className="productos-page container">
       <h1>Productos</h1>
       {productos.length === 0 ? (
         <p>No hay productos disponibles.</p>
       ) : (
-        <div>
+        <div className="productos-grid">
           {productos.map((producto) => (
             <ProductCard key={producto._id} producto={producto} />
           ))}
