@@ -10,6 +10,11 @@ export const obtenerProductoPorId = async (id) => {
   return data;
 };
 
+export const finalizarCompra = async (items) => {
+  const { data } = await api.post("/api/products/comprar", { items });
+  return data;
+};
+
 export const crearProducto = async (producto) => {
   const { data } = await api.post("/api/products", producto);
   return data;

@@ -1,15 +1,46 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { eliminarProducto, vaciarCarrito } from "../redux/slices/cartSlice";
+import { finalizarCompra } from "../services/productService";
 import "./Carrito.css";
 
 const Carrito = () => {
   const items = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [procesando, setProcesando] = useState(false);
+  const [error, setError] = useState(null);
 
   const total = items.reduce(
     (acc, item) => acc + item.precio * item.cantidad,
     0,
   );
+
+  const handleFinalizarCompra = async () => {
+    setError(null);
+    setProcesando(true);
+
+    try {
+      const itemsParaComprar = items.map((item) => ({
+        productoId: item._id,
+        cantidad: item.cantidad,
+      }));
+
+      await finalizarCompra(itemsParaComprar);
+
+      dispatch(vaciarCarrito());
+      alert("¡Compra realizada con éxito!");
+      navigate("/productos");
+    } catch (err) {
+      const mensaje =
+        err.response?.data?.mensaje || "Error al procesar la compra";
+      setError(mensaje);
+    } finally {
+      setProcesando(false);
+    }
+  };
 
   if (items.length === 0) {
     return (
@@ -45,12 +76,22 @@ const Carrito = () => {
         <span>Total</span>
         <span>${total}</span>
       </div>
+
+      {error && <p className="form-error">{error}</p>}
+
       <div className="carrito-acciones">
         <button
           className="btn btn-secondary"
           onClick={() => dispatch(vaciarCarrito())}
         >
           Vaciar carrito
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={handleFinalizarCompra}
+          disabled={procesando}
+        >
+          {procesando ? "Procesando..." : "Finalizar compra"}
         </button>
       </div>
     </div>
