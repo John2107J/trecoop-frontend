@@ -13,13 +13,21 @@ const Productos = () => {
     const cargarProductos = async () => {
       try {
         setCargando(true);
+        setError(null);
         const data = await obtenerProductos(
           busqueda ? { buscar: busqueda } : {},
         );
+
+        if (!Array.isArray(data)) {
+          throw new Error(
+            "La API no devolvió un array de productos. Verificá VITE_API_URL en el .env del frontend.",
+          );
+        }
+
         setProductos(data);
       } catch (err) {
         setError(
-          "No se pudieron cargar los productos. Intentá de nuevo más tarde.",
+          "No se pudieron cargar los productos. Verificá que el backend esté corriendo y que VITE_API_URL esté bien configurada.",
         );
         console.error(err);
       } finally {
@@ -37,7 +45,6 @@ const Productos = () => {
   return (
     <div className="productos-page container">
       <h1>Productos</h1>
-
       <input
         type="text"
         className="productos-buscador"
@@ -45,14 +52,11 @@ const Productos = () => {
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}
       />
-
       {cargando && <p>Cargando productos...</p>}
       {error && <p>{error}</p>}
-
       {!cargando && !error && productos.length === 0 && (
         <p>No se encontraron productos.</p>
       )}
-
       {!cargando && !error && productos.length > 0 && (
         <div className="productos-grid">
           {productos.map((producto) => (

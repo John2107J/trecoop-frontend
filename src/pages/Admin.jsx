@@ -25,10 +25,19 @@ const Admin = () => {
         obtenerProductos(),
         obtenerCategorias(),
       ]);
+
+      if (!Array.isArray(dataProductos) || !Array.isArray(dataCategorias)) {
+        throw new Error(
+          "La API no devolvió arrays válidos. Verificá VITE_API_URL en el .env del frontend.",
+        );
+      }
+
       setProductos(dataProductos);
       setCategorias(dataCategorias);
     } catch (err) {
-      setError("No se pudieron cargar los datos del panel.");
+      setError(
+        "No se pudieron cargar los datos del panel. Verificá que el backend esté corriendo y que VITE_API_URL esté bien configurada.",
+      );
       console.error(err);
     } finally {
       setCargando(false);
